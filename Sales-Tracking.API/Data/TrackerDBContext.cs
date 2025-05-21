@@ -11,6 +11,7 @@ namespace Sales_Tracking.API.Data
         }
 
         public DbSet<FormManagement> FormManagements { get; set; }
-        public DbSet<Tansaction> Tansactions { get; set; }
+        public DbSet<Transaction> Tansactions { get; set; }
+        public DbSet<MaterialManagement> materialManagements { get; set; }
     }
 }

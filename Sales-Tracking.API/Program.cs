@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Sales_Tracking.API.Data;
+using Sales_Tracking.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<FormMangmentService>();
+builder.Services.AddScoped<MaterialManagementService>();
 builder.Services.AddDbContext<TrackerDBContext>(option =>
         option.UseSqlServer(builder.Configuration.GetConnectionString("TrackerConnectionString"))
 );
