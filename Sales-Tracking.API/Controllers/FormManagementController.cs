@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sales_Tracking.API.Models.Domains;
 using Sales_Tracking.API.Services;
+using System.Dynamic;
 
 namespace Sales_Tracking.API.Controllers
 {
@@ -16,11 +17,32 @@ namespace Sales_Tracking.API.Controllers
         }
 
         // GET: api/FormManagement
-        [HttpGet("GetFormManagmentById/{Id}")]
+        [HttpGet("GetProductById/{Id}")]
         public IActionResult GetFormManagements(int Id)
         {
+            if(Id == null)
+            {
+                return BadRequest("Id cannot be null");
+            }
             // Logic to get form managements
-            return Ok();
+            FormManagement response = _formMangmentService.GetProductById(Id).Result;
+            if(response == null)
+            {
+                return NotFound("Product not found");
+            }
+            return Ok(response);
+        }
+
+        [HttpGet("GetProductList")]
+        public IActionResult GetPrdouctList()
+        {
+            // Logic to get form managements
+            var response = _formMangmentService.GetProductList().Result;
+            if (response == null)
+            {
+                return NotFound("Product not found");
+            }
+            return Ok(response);
         }
 
         // POST: api/FormManagement
@@ -38,20 +60,45 @@ namespace Sales_Tracking.API.Controllers
 
 
         // PUT: api/FormManagement/{id}
-        [HttpPut("{id}")]
-        public IActionResult UpdateFormManagement(int id, [FromBody] FormManagement formManagement)
+        [HttpPost("UpdateProduct")]
+        public IActionResult UpdateProduct([FromBody] FormManagement formManagement)
         {
             // Logic to update form management
-            return NoContent();
+            var response = _formMangmentService.UpdateProduct(formManagement).Result;
+            if(response == null)
+            {
+                return BadRequest("Failed to update form management");
+            }
+
+            return Ok(response);
         }
 
 
         // DELETE: api/FormManagement/{id}
-        [HttpDelete("{id}")]
-        public IActionResult DeleteFormManagement(int id)
+        [HttpPost("RemoveProduct")]
+        public IActionResult DeleteFormManagement(FormManagement formManagement)
         {
+            dynamic obj = new ExpandoObject();
             // Logic to delete form management
-            return NoContent();
+            var response = _formMangmentService.RemoveProduct(formManagement).Result;
+            if (response == true)
+            {
+                obj.Message = "Product deleted successfully";
+                obj.StatusCode = 200;
+                return Ok(obj);
+            }
+            else if (response == false)
+            {
+                obj.Message = "Product not found";
+                obj.StatusCode = 404;
+                return NotFound(obj);
+            }
+            else
+            {
+                obj.Message = "Failed to delete product";
+                obj.StatusCode = 400;
+                return BadRequest(obj);
+            }
         }
     }
 }
