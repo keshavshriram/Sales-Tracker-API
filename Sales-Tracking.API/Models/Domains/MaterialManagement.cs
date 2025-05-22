@@ -14,5 +14,6 @@ namespace Sales_Tracking.API.Models.Domains
         public double perProductRate { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public bool IsRecordDeleted { get; set; }
     }
 }

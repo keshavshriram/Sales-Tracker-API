@@ -11,3 +11,6 @@
 
 Alter table [TrackerDB].[dbo].[FormManagements]
 Add IsRecordDeleted bit not null default 0;
+
+Alter table [TrackerDB].[dbo].[materialManagements]
+Add IsRecordDeleted bit not null default 0;
