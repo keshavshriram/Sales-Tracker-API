@@ -33,11 +33,11 @@ namespace Sales_Tracking.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("GetProductList")]
-        public IActionResult GetPrdouctList()
+        [HttpGet("GetProductList/{fieldName}")]
+        public IActionResult GetPrdouctList(string fieldName)
         {
             // Logic to get form managements
-            var response = _formMangmentService.GetProductList().Result;
+            var response = _formMangmentService.GetProductList(fieldName).Result;
             if (response == null)
             {
                 return NotFound("Product not found");

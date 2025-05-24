@@ -25,11 +25,11 @@ namespace Sales_Tracking.API.Services
             }
         }
         
-        public async Task<List<FormManagement>> GetProductList()
+        public async Task<List<FormManagement>> GetProductList(string fieldName)
         {
             try
             {
-                return await _context.FormManagements.Where(s => !s.IsRecordDeleted).ToListAsync();
+                return await _context.FormManagements.Where(s => !s.IsRecordDeleted && s.FieldName != null && s.FieldName.Equals(fieldName)).OrderByDescending(p =>p.productId).ToListAsync();
             }
             catch (Exception ex)
             {

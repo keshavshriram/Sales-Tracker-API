@@ -14,3 +14,8 @@ Add IsRecordDeleted bit not null default 0;
 
 Alter table [TrackerDB].[dbo].[materialManagements]
 Add IsRecordDeleted bit not null default 0;
+
+---------------24 May 2025-------------------
+
+ALTER TABLE [TrackerDB].[dbo].[FormManagements] 
+  ADD FieldName NVARCHAR(200) ;
