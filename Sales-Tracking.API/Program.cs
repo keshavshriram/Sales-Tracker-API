@@ -16,6 +16,17 @@ builder.Services.AddDbContext<TrackerDBContext>(option =>
         option.UseSqlServer(builder.Configuration.GetConnectionString("TrackerConnectionString"))
 );
 
+builder.Services.AddCors(option =>
+    option.AddPolicy("AllowedOrigins",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        }
+    )
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowedOrigins");
 
 app.UseAuthorization();
 
