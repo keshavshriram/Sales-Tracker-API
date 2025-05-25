@@ -33,8 +33,8 @@ namespace Sales_Tracking.API.Services
                 Quantity = dto.Quantity,
                 TotalAmount = dto.TotalAmount,
                 perProductRate = dto.TotalAmount/ dto.Quantity,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
             };
 
             _context.materialManagements.Add(entity);

@@ -11,7 +11,7 @@ namespace Sales_Tracking.API.Models.Domains
         public string? Action { get; set; }
         public int Quantity { get; set; }
         public double TotalAmount { get; set; }
-        public double perProductRate { get; set; }
+        public double ?perProductRate { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         public bool IsRecordDeleted { get; set; }
